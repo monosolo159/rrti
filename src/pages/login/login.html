@@ -1,0 +1,57 @@
+<ion-header>
+  <!-- <ion-navbar>
+    <ion-title>
+      Login
+    </ion-title>
+  </ion-navbar> -->
+</ion-header>
+
+<ion-content class="masters">
+  <ion-item-group class="people-group" padding-top="2%">
+    <ion-grid>
+      <ion-row style="padding-top:40%">
+
+        <ion-col col-6 offset-3>
+          <!-- <section class="cusLogo"> -->
+          <ion-avatar class="cusLogo" item-left style="border-radius: 50%;">
+            <img src="assets/imgs/rrti.png">
+          </ion-avatar>
+          <!-- </section> -->
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <section>
+
+            <!-- <ion-item> -->
+            <!-- <ion-label stacked>ชื่อผู้ใช้</ion-label> -->
+            <ion-input [(ngModel)]="user_username" type="text" placeholder="ชื่อผู้ใช้" value=""></ion-input>
+            <!-- </ion-item> -->
+
+          </section>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <section>
+
+            <!-- <ion-item> -->
+            <!-- <ion-label stacked>รหัสผ่าน</ion-label> -->
+            <ion-input [(ngModel)]="user_password" type="password" placeholder="รหัสผ่าน" value=""></ion-input>
+            <!-- </ion-item> -->
+
+          </section>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-6><button ion-button (click)="login()" block>เข้าสู่ระบบ</button></ion-col>
+        <ion-col col-6><button ion-button color="danger" (click)="register()" block>ลืมรหัสผ่าน</button></ion-col>
+      </ion-row>
+      <!-- <ion-row>
+        <ion-col>
+          <div align="center"><a button color="light" (click)="forgotPassword()" block>ลืมรหัสผ่าน</a></div>
+        </ion-col>
+      </ion-row> -->
+    </ion-grid>
+  </ion-item-group>
+</ion-content>
