@@ -4,6 +4,8 @@ import { Storage } from '@ionic/storage';
 import { LoginPage } from '../login/login';
 import { HttpClient } from '@angular/common/http';
 import { CenterProvider } from '../../providers/center/center';
+import { ForgotpasswordPage } from '../forgotpassword/forgotpassword';
+
 
 @Component({
   selector: 'page-profile',
@@ -56,6 +58,11 @@ export class ProfilePage {
       loading_popup.dismiss();
     }, error => {
     });
+  }
+
+
+  public change_password(){
+    this.navCtrl.push(ForgotpasswordPage, {});
   }
 
   public logout() {

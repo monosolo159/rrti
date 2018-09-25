@@ -5,6 +5,7 @@ import { Md5 } from 'ts-md5/dist/md5';
 import { HttpClient } from '@angular/common/http';
 import { Storage } from '@ionic/storage';
 import { TabsPage } from '../tabs/tabs';
+import { ForgotpasswordPage } from '../forgotpassword/forgotpassword';
 
 @Component({
   selector: 'page-login',
@@ -22,7 +23,7 @@ export class LoginPage {
   }
 
   public forgotPassword(){
-    console.log('forgotPassword');
+    this.navCtrl.push(ForgotpasswordPage, {});
   }
 
   public login() {

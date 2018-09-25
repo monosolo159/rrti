@@ -71,18 +71,21 @@
       <ion-row>
         <ion-col>
             <ion-item>
-            <ion-label stacked>เบอร์โทร : <a href="tel: {{user_tel}}">{{user_tel}}</a></ion-label>
+            <ion-label stacked>เบอร์โทร : {{user_tel}}</ion-label>
             </ion-item>
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col>
             <ion-item>
-            <ion-label stacked>อีเมล์ : {{user_email}}</ion-label>
+            <ion-label stacked>อีเมล์ : {{user_email}}</ion-label>:
             </ion-item>
         </ion-col>
       </ion-row>
-
+      <ion-row>
+        <!-- <ion-col col-6><button ion-button (click)="login()" block>เข้าสู่ระบบ</button></ion-col> -->
+        <ion-col col-12><button ion-button color="secondary" (click)="change_password()" block>เปลี่ยนรหัสผ่าน</button></ion-col>
+      </ion-row>
       <ion-row>
         <!-- <ion-col col-6><button ion-button (click)="login()" block>เข้าสู่ระบบ</button></ion-col> -->
         <ion-col col-12><button ion-button color="danger" (click)="logout()" block>ออกจากระบบ</button></ion-col>

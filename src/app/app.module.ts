@@ -10,6 +10,8 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { ProfilePage } from '../pages/profile/profile';
 import { RiskpointPage } from '../pages/riskpoint/riskpoint';
 import { LoginPage } from '../pages/login/login';
+import { ForgotpasswordPage } from '../pages/forgotpassword/forgotpassword';
+
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -31,6 +33,7 @@ import { IonicStorageModule } from '@ionic/storage';
     ProfilePage,
     RiskpointPage,
     LoginPage,
+    ForgotpasswordPage,
     TabsPage
   ],
   imports: [
@@ -48,6 +51,7 @@ import { IonicStorageModule } from '@ionic/storage';
     ProfilePage,
     RiskpointPage,
     LoginPage,
+    ForgotpasswordPage,
     TabsPage
   ],
   providers: [
