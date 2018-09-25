@@ -6,7 +6,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { TabsPage } from '../pages/tabs/tabs';
 import { LoginPage } from '../pages/login/login';
 
-import { NativeStorage } from '@ionic-native/native-storage';
+// import { NativeStorage } from '@ionic-native/native-storage';
 import { Storage } from '@ionic/storage';
 
 // import { HTTP } from '@ionic-native/http';
