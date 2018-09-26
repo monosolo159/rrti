@@ -22,7 +22,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { CenterProvider } from '../providers/center/center';
 import { HttpClientModule } from '@angular/common/http';
 import { IonicStorageModule } from '@ionic/storage';
-
+import { MomentModule } from 'angular2-moment';
 
 @NgModule({
   declarations: [
@@ -40,7 +40,8 @@ import { IonicStorageModule } from '@ionic/storage';
     BrowserModule,
     HttpClientModule,
     IonicModule.forRoot(MyApp),
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    MomentModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
