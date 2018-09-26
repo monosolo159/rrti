@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      แจ้งจุดเสี่ยง
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="masters">
+  <ion-item-group class="people-group">
+    <ion-grid>
+
+      <ion-row  style="padding-top:5%">
+        <ion-col col-4 offset-4>
+          <button ion-button block large color="light" (click)="presentActionSheet(0)" class="customSection" >เลือกภาพ</button>
+          <ion-thumbnail>
+            <img src="{{pathForImage(lastImage)}}" [hidden]="lastImage === null">
+          </ion-thumbnail>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <section>
+            <ion-input [(ngModel)]="user_username" type="text" placeholder="หัวข้อ" value=""></ion-input>
+          </section>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <section>
+            <ion-input [(ngModel)]="user_username" type="text" placeholder="รายละเอียด" value=""></ion-input>
+          </section>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <section>
+            <ion-input [(ngModel)]="user_username" type="text" placeholder="ความสำคัญ" value=""></ion-input>
+          </section>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12><button ion-button (click)="login()" block>แจ้งจุดเสี่ยง</button></ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-item-group>
+</ion-content>

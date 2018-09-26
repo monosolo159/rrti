@@ -4,8 +4,11 @@ import { NavController, AlertController, LoadingController  } from 'ionic-angula
 import { Storage } from '@ionic/storage';
 import { CenterProvider } from '../../providers/center/center';
 import { HttpClient } from '@angular/common/http';
-import * as moment from 'moment';
+// import * as moment from 'moment';
 import 'moment/locale/th';
+import { RiskpointdetailPage } from '../riskpointdetail/riskpointdetail';
+import { RiskpointsendPage } from '../riskpointsend/riskpointsend';
+
 
 @Component({
   selector: 'page-riskpoint',
@@ -15,6 +18,7 @@ export class RiskpointPage {
 
   // searchQuery: string = '';
   items: string[];
+  max_item = 0;
 
   constructor(public navCtrl: NavController,public centerProvider:CenterProvider,public storage:Storage,public alertCtrl:AlertController, public loadingCtrl:LoadingController,public http:HttpClient) {
     storage.get('user_data').then((val) => {
@@ -30,25 +34,26 @@ export class RiskpointPage {
     loading_popup.present();
 
     var send_data = { 'user_id': user_id };
-    var link = this.centerProvider.get_web_api()+"Service_liskpoint/selectAllRiskpoint/format/json";
+    var link = this.centerProvider.get_web_api()+"Service_riskpoint/selectAllRiskpoint/format/json";
     this.http.post(link, send_data)
     .subscribe(response => {
       loading_popup.dismiss();
       this.items = JSON.parse(JSON.stringify(response));
+      this.max_item = this.items.length;
+      console.log(this.max_item);
     }, error => {
     });
   }
 
-  public detail(id){
-    console.log(id);
-    // this.navCtrl.push(DinodetailPage, {
-    //   id: id
-    // })
-
+  public riskpointdetail(riskpoint_id){
+    console.log(riskpoint_id);
+    this.navCtrl.push(RiskpointdetailPage, {
+      riskpoint_id: riskpoint_id
+    })
   }
 
   public send_riskpoint(){
-    
+    this.navCtrl.push(RiskpointsendPage, {});
   }
 
   // getItems(ev: any) {

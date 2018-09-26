@@ -11,6 +11,7 @@ import { HttpClient } from '@angular/common/http';
 */
 @Injectable()
 export class CenterProvider {
+  // public web_api = 'http://rrti.wichetpong.com/';
   public web_api = 'http://192.168.0.101/rrti/';
   // public web_api = 'http://172.16.0.166/rrtiweb/';
   constructor(public http: HttpClient) {

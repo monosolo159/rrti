@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      ความคืบหน้าจุดเสี่ยง
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="masters">
+  <ion-item-group class="people-group">
+    <ion-grid>
+      <ion-row style="padding-top:5%">
+
+        <ion-col col-12>
+          <ion-avatar item-left *ngFor="let item_pic of data_table_pic;let i = index">
+            <img src="assets/imgs/rrti.png" style="padding-bottom:2%">
+          </ion-avatar>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            วันที่แจ้ง : {{riskpoint_date | amTimeAgo}}
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            ความสำคัญ : {{riskpoint_piority_name}}
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            สถานะ : {{riskpoint_status_name}}
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            หัวข้อ : {{riskpoint_name}}
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-card>
+        <ion-card-header style="white-space: normal;">
+          รายละเอียด
+        </ion-card-header>
+        <ion-card-content>
+          <p>{{riskpoint_detail}}</p>
+        </ion-card-content>
+      </ion-card>
+
+
+    </ion-grid>
+  </ion-item-group>
+</ion-content>

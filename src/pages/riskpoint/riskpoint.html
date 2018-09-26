@@ -12,10 +12,9 @@
       <ion-col col-12><button ion-button color="primary" (click)="send_riskpoint()" block>แจ้งจุดเสี่ยง</button></ion-col>
     </ion-row>
     <ion-grid>
-
       <ion-list style="opacity: 0.8;">
-          <ion-item *ngFor="let item of items;let i = index" (click)="detail(item.riskpoint_id-1)">
-           <span style="font-size: 1.2rem">[{{item.riskpoint_id}}] {{item.riskpoint_name}}</span><span item-end style="font-size: 1.2rem">[{{item.riskpoint_status_name}}] [{{item.riskpoint_last_update | amTimeAgo}}]</span>
+          <ion-item *ngFor="let item of items;let i = index" (click)="riskpointdetail(item.riskpoint_id)">
+           <span style="">[{{max_item-i}}] {{item.riskpoint_name}}</span><span item-end style="">[{{item.riskpoint_status_name}}] [{{item.riskpoint_date | amTimeAgo}}]</span>
           </ion-item>
       </ion-list>
   </ion-grid>

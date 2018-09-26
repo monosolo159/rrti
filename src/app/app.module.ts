@@ -11,6 +11,8 @@ import { ProfilePage } from '../pages/profile/profile';
 import { RiskpointPage } from '../pages/riskpoint/riskpoint';
 import { LoginPage } from '../pages/login/login';
 import { ForgotpasswordPage } from '../pages/forgotpassword/forgotpassword';
+import { RiskpointdetailPage } from '../pages/riskpointdetail/riskpointdetail';
+import { RiskpointsendPage } from '../pages/riskpointsend/riskpointsend';
 
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -23,6 +25,11 @@ import { CenterProvider } from '../providers/center/center';
 import { HttpClientModule } from '@angular/common/http';
 import { IonicStorageModule } from '@ionic/storage';
 import { MomentModule } from 'angular2-moment';
+import { Camera } from '@ionic-native/camera';
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
+import { File } from '@ionic-native/file';
+import { Crop } from '@ionic-native/crop';
+
 
 @NgModule({
   declarations: [
@@ -34,6 +41,8 @@ import { MomentModule } from 'angular2-moment';
     RiskpointPage,
     LoginPage,
     ForgotpasswordPage,
+    RiskpointdetailPage,
+    RiskpointsendPage,
     TabsPage
   ],
   imports: [
@@ -53,13 +62,17 @@ import { MomentModule } from 'angular2-moment';
     RiskpointPage,
     LoginPage,
     ForgotpasswordPage,
+    RiskpointdetailPage,
+    RiskpointsendPage,
     TabsPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    // HTTP,
-    // NativeStorage,
+    Camera,
+    File,
+    FileTransfer,
+    Crop,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     CenterProvider
   ]
