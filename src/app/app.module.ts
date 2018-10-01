@@ -29,7 +29,8 @@ import { Camera } from '@ionic-native/camera';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 import { File } from '@ionic-native/file';
 import { Crop } from '@ionic-native/crop';
-
+import { FilePath } from '@ionic-native/file-path';
+import { ImagePicker } from '@ionic-native/image-picker';
 
 @NgModule({
   declarations: [
@@ -73,6 +74,8 @@ import { Crop } from '@ionic-native/crop';
     File,
     FileTransfer,
     Crop,
+    FilePath,
+    ImagePicker,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     CenterProvider
   ]

@@ -24,8 +24,10 @@
     "@ionic-native/core": "~4.12.0",
     "@ionic-native/crop": "^4.15.0",
     "@ionic-native/file": "^4.15.0",
+    "@ionic-native/file-path": "^4.15.0",
     "@ionic-native/file-transfer": "^4.15.0",
     "@ionic-native/http": "^4.14.0",
+    "@ionic-native/image-picker": "^4.15.0",
     "@ionic-native/native-storage": "^4.14.0",
     "@ionic-native/splash-screen": "~4.12.0",
     "@ionic-native/status-bar": "~4.12.0",
@@ -37,10 +39,12 @@
     "cordova-plugin-device": "^2.0.2",
     "cordova-plugin-file": "^6.0.1",
     "cordova-plugin-file-transfer": "^1.7.1",
+    "cordova-plugin-filepath": "^1.4.2",
     "cordova-plugin-ionic-keyboard": "^2.1.2",
-    "cordova-plugin-ionic-webview": "^2.1.4",
+    "cordova-plugin-ionic-webview": "^1.2.1",
     "cordova-plugin-splashscreen": "^5.0.2",
     "cordova-plugin-statusbar": "^2.4.2",
+    "cordova-plugin-telerik-imagepicker": "^2.2.2",
     "cordova-plugin-whitelist": "^1.3.3",
     "cordova-sqlite-storage": "^2.4.0",
     "ionic-angular": "3.9.2",
@@ -63,15 +67,17 @@
       "cordova-plugin-statusbar": {},
       "cordova-plugin-device": {},
       "cordova-plugin-splashscreen": {},
-      "cordova-plugin-ionic-webview": {
-        "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+"
-      },
       "cordova-plugin-ionic-keyboard": {},
       "cordova-sqlite-storage": {},
       "cordova-plugin-camera": {},
       "cordova-plugin-file-transfer": {},
       "cordova-plugin-file": {},
-      "cordova-plugin-crop": {}
+      "cordova-plugin-crop": {},
+      "cordova-plugin-filepath": {},
+      "cordova-plugin-ionic-webview": {},
+      "cordova-plugin-telerik-imagepicker": {
+        "PHOTO_LIBRARY_USAGE_DESCRIPTION": "App wants to access your gallery"
+      }
     },
     "platforms": [
       "android"

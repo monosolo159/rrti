@@ -8,6 +8,9 @@ import { Camera } from '@ionic-native/camera';
 import { File } from '@ionic-native/file';
 import { FileTransfer,FileTransferObject } from '@ionic-native/file-transfer';
 import { Crop } from '@ionic-native/crop';
+import { FilePath } from '@ionic-native/file-path';
+import { ImagePicker } from '@ionic-native/image-picker';
+
 declare var cordova: any;
 
 
@@ -18,125 +21,48 @@ declare var cordova: any;
 export class RiskpointsendPage {
 
   public data_table: Array<{}>;
+  public data_table_piority: Array<{}>;
+  public images = [];
   lastImage: string = null;
   loading: Loading;
-  public user_id = '';
+  // public user_id = '';
+  public riskpoint_name = '';
+  public riskpoint_detail = '';
+  public riskpoint_piority_id = '';
+  public user_from_id = '';
 
-  constructor(public navCtrl: NavController, public actionSheetCtrl: ActionSheetController, public alertCtrl: AlertController, public platform: Platform, public loadingCtrl: LoadingController, public toastCtrl: ToastController, public centerProvider: CenterProvider, public storage: Storage, public http: HttpClient, public app: App,public transfer: FileTransfer, public file: File,public camera: Camera,public crop: Crop) {
+
+  constructor(public navCtrl: NavController, public actionSheetCtrl: ActionSheetController, public filePath:FilePath, public imagePicker:ImagePicker, public alertCtrl: AlertController, public platform: Platform, public loadingCtrl: LoadingController, public toastCtrl: ToastController, public centerProvider: CenterProvider, public storage: Storage, public http: HttpClient, public app: App,public transfer: FileTransfer, public file: File,public camera: Camera,public crop: Crop) {
     storage.get('user_data').then((val) => {
-      this.user_id = val['user_id'];
+      this.user_from_id = val['user_id'];
+      this.getPiority();
     });
-  }
-  public presentActionSheet() {
-    //สร้างเมนูเพื่อเลอกว่า จากกล้อง หรือ จาก คลังภาพ
-    let actionSheet = this.actionSheetCtrl.create({
-      // title: 'เลือกที่อยูภาพ',
-      buttons: [
-        {
-          text: 'เลือกจากคลังภาพ',
-          handler: () => {
-            this.takePicture(this.camera.PictureSourceType.PHOTOLIBRARY);
-          }
-        },
-        {
-          text: 'ถ่ายภาพ',
-          handler: () => {
-            this.takePicture(this.camera.PictureSourceType.CAMERA);
-          }
-        },
-        {
-          text: 'ยกเลิก',
-          role: 'cancel'
-        }
-      ]
-    });
-    actionSheet.present();
+
   }
 
-  public takePicture(sourceType) {
-    console.log('takePicture');
-    //คุณสมบัติของภาพ
-    var options = {
-      quality: 100,
-      sourceType: sourceType,
-      saveToPhotoAlbum: true,
-      correctOrientation: true,
-      targetWidth: 500
-    };
-
-    // Get the data of an image
-    this.camera.getPicture(options).then((imagePath) => {
-      // Special handling for Android library
-      // alert('imagePath 1 = ' + imagePath);
-      if (this.platform.is('android') && sourceType === this.camera.PictureSourceType.PHOTOLIBRARY) {
-        // FilePath.resolveNativePath(imagePath)
-        // .then(filePath => {
-        imagePath = 'file://' + imagePath;
-        // alert('imagePath ' + imagePath);
-        // alert('filePath  ' + filePath);
-        this.crop.crop(imagePath, { quality: 100 }).then((path) => {
-          // alert('imagePath Crop' + imagePath);
-          imagePath = path;
-          // let correctPath = filePath.substr(0, filePath.lastIndexOf('/') + 1);
-          let correctPath = imagePath.substr(0, imagePath.lastIndexOf('/') + 1);
-          // alert('correctPath ' + correctPath);
-          let currentName = imagePath.substring(imagePath.lastIndexOf('/') + 1, imagePath.lastIndexOf('?'));
-          // alert('currentName ' + currentName);
-          this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
-        });
-        // });
-
-      } else {
-        // alert('imagePath ' + imagePath);
-        this.crop.crop(imagePath, { quality: 100 }).then((path) => {
-          imagePath = path;
-          // var currentName = imagePath.substr(imagePath.lastIndexOf('/') + 1);
-          let currentName = imagePath.substring(imagePath.lastIndexOf('/') + 1, imagePath.lastIndexOf('?'));
-          // alert('currentName ' + currentName);
-          var correctPath = imagePath.substr(0, imagePath.lastIndexOf('/') + 1);
-          // alert('correctPath ' + correctPath);
-          this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
-
-        });
-
-      }
-
-    }, (err) => {
-      // this.presentToast('Error while selecting image.');
-    });
-  }
-
-
-  private createFileName() {
-    console.log('createFileName');
-
-    var d = new Date();
-    var n = d.getTime();
-    var newFileName = this.user_id + '_' + n + ".jpg";
-    return newFileName;
-  }
-
-  private copyFileToLocalDir(namePath, currentName, newFileName) {
-    console.log('copyFileToLocalDir');
-
-    this.file.copyFile(namePath, currentName, cordova.file.dataDirectory, newFileName).then(success => {
-      this.lastImage = newFileName;
-      this.uploadImage();
+  getPiority(){
+    var send_data = { };
+    var link = this.centerProvider.get_web_api()+"Service_riskpoint/getPiority/format/json";
+    this.http.post(link, send_data)
+    .subscribe(response => {
+      this.data_table_piority = JSON.parse(JSON.stringify(response));
     }, error => {
-      this.presentToast('Error while storing file.');
     });
   }
 
-  private presentToast(text) {
-    let toast = this.toastCtrl.create({
-      message: text,
-      duration: 3000,
-      position: 'top'
+
+  getPictures(){
+    this.images = [];
+    this.imagePicker.getPictures({
+    }).then( results =>{
+      console.log(results);
+      for(let i=0; i < results.length;i++){
+        this.images.push(results[i]);
+      };
     });
-    toast.present();
   }
 
-  // Always get the accurate path to your apps folder
+
   public pathForImage(img) {
     if (img === null) {
       return '';
@@ -145,78 +71,67 @@ export class RiskpointsendPage {
     }
   }
 
-  public uploadImage() {
+  private createFileName() {
+    var d = new Date();
+    var n = d.getTime();
+    var newFileName = n + ".jpg";
+    return newFileName;
+  }
+
+  public send_riskpoint() {
     // Destination URL
     console.log('uploadImage');
 
     var url = this.centerProvider.get_web_api() + "Service_riskpoint/uploadImage";
-    // var url = this.server.linkServer() + "car_service/uploadImage";
 
-    //แสดงเอฟเฟคการโหลดข้อมูล
-    var targetPath = this.pathForImage(this.lastImage);
+    var targetPath = '';
+    var filename = '';
+    // var riskpoint_id;
 
-    // File name only
-    var filename = this.lastImage;
-
-    var options = {
-      fileKey: "file",
-      fileName: filename,
-      chunkedMode: false,
-      mimeType: "multipart/form-data"
-      // params: { 'fileName': filename }
-    };
-
-    const fileTransfer: FileTransferObject = this.transfer.create();
-
-    this.loading = this.loadingCtrl.create({
-      // content: 'Uploading...',
-    });
-    this.loading.present();
-
-    fileTransfer.upload(targetPath, url, options).then(data => {
-      this.loading.dismissAll();
-      // this.presentToast('Image succesful uploaded.');
-      this.userUpdatePhoto();
-    }, err => {
-      this.loading.dismissAll();
-      // this.presentToast('Error while uploading file.');
-    });
-  }
-
-
-  public userUpdatePhoto() {
-    // console.log('userUpdatePhoto 1');
-
-    let loading_popup = this.loadingCtrl.create({});
-    loading_popup.present();
-    // console.log('userUpdatePhoto 2');
-
-    var send_data = {
-      'user_id': this.user_id,
-      'user_photo': this.lastImage
-    };
-
-    var link = this.centerProvider.get_web_api() + "user_service/userUpdatePhoto";
-
+    var send_data = { 'riskpoint_name': this.riskpoint_name, 'riskpoint_detail': this.riskpoint_detail, 'riskpoint_piority_id': this.riskpoint_piority_id, 'user_from_id': this.user_from_id };
+    var link = this.centerProvider.get_web_api()+"Service_riskpoint/insertRiskpoint/format/json";
     this.http.post(link, send_data)
-      .subscribe(response => {
-        console.log('userUpdatePhoto 4');
+    .subscribe(response => {
+      // loading_popup.dismiss();
 
-        // this.user_photo = this.lastImage;
-        loading_popup.dismiss();
-        // this.reload_user();
-        // this.navCtrl.pop();
-      }, error => {
-        console.log("error upload");
-        // console.log(error);
-      });
-      console.log('userUpdatePhoto 5');
+      this.data_table = JSON.parse(JSON.stringify(response));
+      // console.log('response : '+response);
+      // console.log('data_table : '+this.data_table);
+      if (response > 0) {
+        // riskpoint_id = this.data_table;
+        for(let i=0; i < this.images.length;i++){
+          // this.images.push(results[i]);
+          targetPath = this.images[i];
+          console.log('targetPath : '+targetPath);
+          filename = this.createFileName();
 
-  }
+          var options = {
+            fileKey: "file",
+            fileName: filename,
+            chunkedMode: false,
+            mimeType: "multipart/form-data",
+            params: { 'riskpoint_id': this.data_table }
+          };
 
-  public userPhoto() {
-    this.uploadImage();
-    this.userUpdatePhoto();
+          const fileTransfer: FileTransferObject = this.transfer.create();
+          fileTransfer.upload(targetPath, url, options).then(data => {
+            console.log('Image succesful uploaded.');
+          }, err => {
+            console.log('Error while uploading file.');
+          });
+
+        }
+
+      } else {
+        let alert = this.alertCtrl.create({
+          //title: 'แจ้งเตือน',
+          subTitle: 'ไม่สามารถแจ้งจุดเสี่ยงในขณะนี้ได้',
+          buttons: ['ตกลง']
+        });
+        alert.present();
+      }
+    }, error => {
+    });
 
   }
 

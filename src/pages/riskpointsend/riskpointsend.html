@@ -9,19 +9,18 @@
 <ion-content class="masters">
   <ion-item-group class="people-group">
     <ion-grid>
-
-      <ion-row  style="padding-top:5%">
-        <ion-col col-4 offset-4>
-          <button ion-button block large color="light" (click)="presentActionSheet(0)" class="customSection" >เลือกภาพ</button>
-          <ion-thumbnail>
-            <img src="{{pathForImage(lastImage)}}" [hidden]="lastImage === null">
-          </ion-thumbnail>
+      <ion-row>
+        <ion-col col-10 offset-1>
+          <button ion-button col-4 offset-4 block large color="light" (click)="getPictures()">เลือกภาพ</button>
+           <div *ngFor="let image of images">
+           <img src="{{image}}"/>
+           </div>
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col>
           <section>
-            <ion-input [(ngModel)]="user_username" type="text" placeholder="หัวข้อ" value=""></ion-input>
+            <ion-input [(ngModel)]="riskpoint_name" type="text" placeholder="หัวข้อ" value=""></ion-input>
           </section>
         </ion-col>
       </ion-row>
@@ -29,19 +28,27 @@
       <ion-row>
         <ion-col>
           <section>
-            <ion-input [(ngModel)]="user_username" type="text" placeholder="รายละเอียด" value=""></ion-input>
+            <ion-input [(ngModel)]="riskpoint_detail" type="text" placeholder="รายละเอียด" value=""></ion-input>
           </section>
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col>
           <section>
-            <ion-input [(ngModel)]="user_username" type="text" placeholder="ความสำคัญ" value=""></ion-input>
+            <!-- <ion-item> -->
+            <select [(ngModel)]="riskpoint_piority_id" size="5">
+                <option selected="selected" disabled="disabled" value="0">ความสำคัญ</option>
+                <option *ngFor="let item of data_table_piority" value="{{item.riskpoint_piority_id}}">{{item.riskpoint_piority_name}}</option>
+            </select>
+            <!-- </ion-item> -->
           </section>
+          <!-- <section>
+            <ion-input [(ngModel)]="riskpoint_piority_id" type="text" placeholder="ความสำคัญ" value=""></ion-input>
+          </section> -->
         </ion-col>
       </ion-row>
       <ion-row>
-        <ion-col col-12><button ion-button (click)="login()" block>แจ้งจุดเสี่ยง</button></ion-col>
+        <ion-col col-12><button ion-button (click)="send_riskpoint()" block>แจ้งจุดเสี่ยง</button></ion-col>
       </ion-row>
     </ion-grid>
   </ion-item-group>

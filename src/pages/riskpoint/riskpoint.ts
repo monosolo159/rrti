@@ -27,6 +27,12 @@ export class RiskpointPage {
 
   }
 
+  ionViewWillEnter() {
+    this.storage.get('user_data').then((val) => {
+      this.initializeItems(val['user_id']);
+    });
+  }
+
   public initializeItems(user_id) {
     let loading_popup = this.loadingCtrl.create({
       // content: 'เข้าสู่ระบบ...'

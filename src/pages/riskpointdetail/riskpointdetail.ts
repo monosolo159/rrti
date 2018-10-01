@@ -19,10 +19,11 @@ export class RiskpointdetailPage {
   public riskpoint_status_name = '';
   public riskpoint_piority_name = '';
   public riskpoint_date = '';
-
+  public web_url = '';
 
   constructor(public navCtrl: NavController,public alertCtrl:AlertController, public navParams:NavParams, public loadingCtrl:LoadingController,public http: HttpClient,public centerProvider:CenterProvider) {
     this.get_data(this.navParams.get('riskpoint_id'));
+    this.web_url = centerProvider.get_web_api()+'assets/img/riskpoint/';
   }
 
   public get_data(riskpoint_id) {
