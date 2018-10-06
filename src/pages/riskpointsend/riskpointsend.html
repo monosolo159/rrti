@@ -35,16 +35,11 @@
       <ion-row>
         <ion-col>
           <section>
-            <!-- <ion-item> -->
-            <select [(ngModel)]="riskpoint_piority_id" size="5">
-                <option selected="selected" disabled="disabled" value="0">ความสำคัญ</option>
+            <select [(ngModel)]="riskpoint_piority_id" size="4">
+                <option value="" selected>--เลือก--</option>
                 <option *ngFor="let item of data_table_piority" value="{{item.riskpoint_piority_id}}">{{item.riskpoint_piority_name}}</option>
             </select>
-            <!-- </ion-item> -->
           </section>
-          <!-- <section>
-            <ion-input [(ngModel)]="riskpoint_piority_id" type="text" placeholder="ความสำคัญ" value=""></ion-input>
-          </section> -->
         </ion-col>
       </ion-row>
       <ion-row>

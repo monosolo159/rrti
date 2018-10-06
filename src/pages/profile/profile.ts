@@ -50,7 +50,7 @@ export class ProfilePage {
       this.user_subdistrict = this.data_table[0]['new_subdistrict'];
       this.user_district = this.data_table[0]['new_district'];
       this.user_province = this.data_table[0]['new_province'];
-      this.user_zipcode = this.data_table[0]['new_zipcode'];
+      this.user_zipcode = this.data_table[0]['user_zipcode'];
       this.user_tel = this.data_table[0]['user_tel'];
       this.user_email = this.data_table[0]['user_email'];
       this.user_area = this.data_table[0]['new_area'];
