@@ -91,5 +91,4 @@
     <plugin name="cordova-plugin-telerik-imagepicker" spec="^2.2.2">
         <variable name="PHOTO_LIBRARY_USAGE_DESCRIPTION" value="App wants to access your gallery" />
     </plugin>
-    <engine name="android" spec="7.0.0" />
 </widget>
